@@ -1,11 +1,11 @@
-package com.example.doctorsappointment
+package com.example.doctorsappointment.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.example.doctorsappointment.databinding.ActivityMainBinding
+import com.example.doctorsappointment.MainActivity
 import com.example.doctorsappointment.databinding.ActivitySplashScreenBinding
 
 class SplashScreen : AppCompatActivity() {
@@ -21,6 +21,6 @@ class SplashScreen : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 3000)
+        }, 100)
     }
 }

@@ -55,4 +55,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
+
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 }
