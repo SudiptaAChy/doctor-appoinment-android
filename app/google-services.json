@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "214733097597",
+    "project_id": "doctors-appoint-kotlin",
+    "storage_bucket": "doctors-appoint-kotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214733097597:android:6952347ca8ec9a07d4ff14",
+        "android_client_info": {
+          "package_name": "com.example.doctorsappointment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtRD-y2JwVC92y-wUw0Js7Pj8ZG1eNGo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
