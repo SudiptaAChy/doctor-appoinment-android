@@ -31,7 +31,7 @@ class SignupViewModel : ViewModel() {
             val (user, exception) = repository.signUpUser(email, password)
 
             if (exception != null) {
-                _userResponse.value = ResponseState.Error(exception.toString())
+                _userResponse.value = ResponseState.Error(exception.message.toString())
             } else {
                 val error = repository.saveUserData(UserModel(user?.uid, name, phone))
                 if (error != null) {

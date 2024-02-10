@@ -24,7 +24,7 @@ class LoginViewModel: ViewModel() {
             val (user, error) = repository.loginUser(email, password)
 
             if (error != null) {
-                _userResponse.value = ResponseState.Error(error.toString())
+                _userResponse.value = ResponseState.Error(error.message.toString())
             } else {
                 _userResponse.value = ResponseState.Success(user)
             }
