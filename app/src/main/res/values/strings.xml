@@ -12,4 +12,17 @@
     <string name="already_have_account">Already have account?</string>
     <string name="enter_name_optional">Enter Name (optional)</string>
     <string name="enter_phone_number_optional">Enter Phone Number (optional)</string>
+    <string name="select_doctor">Select doctor</string>
+    <string name="appointments">Appointments</string>
+    <string name="time">Time</string>
+    <string name="total_slot">Total Slot</string>
+    <string name="available_slot">Available Slot</string>
+    <string name="slot_status">Slot Status</string>
+    <string name="select_a_doctor_to_view_his_appointments">Select a doctor to view his appointments.</string>
+    <string name="profile_icon">profile icon</string>
+    <string name="navigate_back_icon">navigate back icon</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="view_nschedule">View</string>
 </resources>
