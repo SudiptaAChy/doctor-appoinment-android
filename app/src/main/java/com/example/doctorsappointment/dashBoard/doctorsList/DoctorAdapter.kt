@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doctorsappointment.R
+import com.example.doctorsappointment.models.DoctorModel
 
 class DoctorAdapter(
     private val doctors: List<DoctorModel>,
@@ -15,7 +16,7 @@ class DoctorAdapter(
     class DoctorViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.name)
         val phone: TextView = itemView.findViewById(R.id.phone)
-        val address: TextView = itemView.findViewById(R.id.address)
+        val email: TextView = itemView.findViewById(R.id.address)
         val btnSchedule: Button = itemView.findViewById(R.id.btnSchedule)
     }
 
@@ -30,7 +31,7 @@ class DoctorAdapter(
         val doctor = doctors[position]
         holder.name.text = doctor.name
         holder.phone.text = doctor.phone
-        holder.address.text = doctor.address
+        holder.email.text = doctor.email
         holder.btnSchedule.setOnClickListener { onItemClick(position) }
     }
 }

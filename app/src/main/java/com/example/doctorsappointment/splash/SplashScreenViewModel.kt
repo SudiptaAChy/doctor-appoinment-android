@@ -14,10 +14,8 @@ class SplashScreenViewModel: ViewModel() {
     private val repository = AuthRepositories
 
     fun isUserLoggedIn() {
-        viewModelScope.launch {
-            val loggedIn = repository.isLoggedIn()
-            if (loggedIn) _userLoggedIn.value = 1
-            else _userLoggedIn.value = 0
-        }
+        val loggedIn = repository.isLoggedIn()
+        if (loggedIn) _userLoggedIn.value = 1
+        else _userLoggedIn.value = 0
     }
 }

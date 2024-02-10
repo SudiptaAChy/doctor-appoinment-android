@@ -12,7 +12,7 @@ import kotlinx.coroutines.tasks.await
 object AuthRepositories {
     private val auth: FirebaseAuth = Firebase.auth
 
-    suspend fun isLoggedIn(): Boolean {
+    fun isLoggedIn(): Boolean {
         val currentUser = auth.currentUser
         return currentUser != null
     }
