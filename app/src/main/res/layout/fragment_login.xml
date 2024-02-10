@@ -59,6 +59,14 @@
             app:cornerRadius="@dimen/_2sdp"
             android:text="@string/login"/>
 
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/pbLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            app:cornerRadius="@dimen/_2sdp"/>
+
         <LinearLayout
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_width="wrap_content"

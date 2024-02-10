@@ -2,7 +2,6 @@ package com.example.doctorsappointment.repositories
 
 import com.example.doctorsappointment.models.UserModel
 import com.example.doctorsappointment.utils.Constants
-import com.example.doctorsappointment.utils.ResponseState
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

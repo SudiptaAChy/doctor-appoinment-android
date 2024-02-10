@@ -2,7 +2,6 @@ package com.example.doctorsappointment.signUp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.doctorsappointment.databinding.FragmentSignUpBinding
-import com.example.doctorsappointment.models.UserModel
-import com.example.doctorsappointment.repositories.AuthRepositories
 import com.example.doctorsappointment.utils.Constants
 import com.example.doctorsappointment.utils.ResponseState
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.auth.User
+import com.example.doctorsappointment.dashBoard.DashboardActivity
 
 class SignUpFragment : Fragment() {
     private var _binding: FragmentSignUpBinding? = null
