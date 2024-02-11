@@ -1,5 +1,6 @@
 package com.example.doctorsappointment.dashBoard.appointmentList
 
+import android.app.AlertDialog
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import com.example.doctorsappointment.dashBoard.DashboardActivity
 import com.example.doctorsappointment.databinding.FragmentAppointmentListBinding
 import com.example.doctorsappointment.models.AppointmentItemModel
 import com.example.doctorsappointment.utils.ResponseState
+import com.example.doctorsappointment.utils.SlotStatus
 
 @RequiresApi(Build.VERSION_CODES.O)
 class AppointmentListFragment : Fragment() {
@@ -20,6 +22,8 @@ class AppointmentListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AppointmentListViewModel by viewModels()
+
+    private var adapter: AppointmentAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,13 +48,47 @@ class AppointmentListFragment : Fragment() {
                     hideLoader()
                     Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                 }
+
                 ResponseState.Loading -> {
                     showLoader()
                 }
+
                 is ResponseState.Success -> {
                     hideLoader()
-                    val adapter = AppointmentAdapter(requireContext(), it.data as List<AppointmentItemModel>)
+                    val appointments = it.data as? List<AppointmentItemModel> ?: listOf()
+                    adapter = AppointmentAdapter(
+                        requireContext(),
+                        appointments.toMutableList()
+                    ) { position ->
+                        appointments[position].id?.let { id ->
+                            viewModel.bookAppointment(id) {
+                                val newData = AppointmentItemModel(
+                                    id = appointments[position].id,
+                                    totalSlot = appointments[position].totalSlot,
+                                    availableSlot = appointments[position].availableSlot?.minus(1),
+                                    slotStatus = SlotStatus.BOOKED.title
+                                )
+                                adapter?.changedItem(position, newData)
+                            }
+                        }
+                    }
                     binding.rvAppointments.adapter = adapter
+                }
+            }
+        }
+
+        viewModel.bookingResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResponseState.Error -> {
+                    showAlertDialog(it.errorMessage)
+                }
+
+                ResponseState.Loading -> {
+                    showAlertDialog("Booking this appointment please wait.")
+                }
+
+                is ResponseState.Success -> {
+                    showAlertDialog(it.data as String)
                 }
             }
         }
@@ -73,6 +111,18 @@ class AppointmentListFragment : Fragment() {
         (requireActivity() as DashboardActivity).showBackButton()
 
         viewModel.getScheduleOfDoctor(arguments?.getString("uid") ?: "")
+    }
+
+    private fun showAlertDialog(msg: String) {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+
+        dialogBuilder.setMessage(msg)
+        dialogBuilder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+        dialogBuilder.setCancelable(false)
+
+        dialogBuilder.create().show()
     }
 
     override fun onDestroyView() {

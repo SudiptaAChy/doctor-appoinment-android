@@ -13,7 +13,7 @@ object DateTimeUtils {
     @RequiresApi(Build.VERSION_CODES.O)
     fun getStartingTimestampOfToday(): String {
         val now = LocalDateTime.now()
-        val startOfToday = now.withHour(0).withMinute(0).withSecond(0).withNano(0)
+        val startOfToday = now.withHour(0).withMinute(0).withSecond(0).withNano(0).minusHours(6)
         val timestamp = startOfToday.toEpochSecond(ZoneOffset.UTC)
         return timestamp.toString()
     }

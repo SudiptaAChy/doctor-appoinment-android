@@ -23,6 +23,19 @@ object DoctorRepositories {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun bookAppointment(scheduleId: String): Exception? {
+        return try {
+            val db = Firebase.firestore
+            val userId = AuthRepositories.getCurrentUserId()
+            val createdAt = DateTimeUtils.getCurrentTimestamp()
+            db.collection(Constants.APPOINTMENT_TABLE).add(AppointmentModel(scheduleId, userId, createdAt)).await()
+            null
+        } catch (e: Exception) {
+            e
+        }
+    }
+
     suspend fun getScheduleOfDoctor(uid: String): Pair<List<ScheduleModel>?, Exception?> {
         return try {
             val db = Firebase.firestore

@@ -13,8 +13,14 @@ import com.example.doctorsappointment.utils.SlotStatus
 
 class AppointmentAdapter(
     private val context: Context,
-    private val appointments: List<AppointmentItemModel>
+    private val appointments: MutableList<AppointmentItemModel>,
+    private val onItemClick: (Int) -> Unit,
 ): RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder>() {
+    fun changedItem(position: Int, newData: AppointmentItemModel) {
+        appointments[position] = newData
+        notifyItemChanged(position)
+    }
+
     class AppointmentViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
         val time: TextView = itemView.findViewById(R.id.tvTime)
         val totalSlot: TextView = itemView.findViewById(R.id.tvTotalSlot)
@@ -57,6 +63,12 @@ class AppointmentAdapter(
                 time.setTextColor(ContextCompat.getColor(context, R.color.disable_text_color))
                 totalSlot.setTextColor(ContextCompat.getColor(context, R.color.disable_text_color))
                 availableSlot.setTextColor(ContextCompat.getColor(context, R.color.disable_text_color))
+            }
+        }
+
+        holder.slotStatus.setOnClickListener {
+            if (appointment.slotStatus?.equals(SlotStatus.AVAILABLE.title, true) == true) {
+                onItemClick(position)
             }
         }
     }

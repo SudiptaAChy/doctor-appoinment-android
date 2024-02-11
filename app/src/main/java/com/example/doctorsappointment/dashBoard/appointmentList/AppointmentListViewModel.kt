@@ -22,7 +22,29 @@ class AppointmentListViewModel : ViewModel() {
     private val _scheduleResponse = MutableLiveData<ResponseState<Any?>>()
     val scheduleResponse: LiveData<ResponseState<Any?>> get() = _scheduleResponse
 
+
+    private val _bookingResponse = MutableLiveData<ResponseState<Any?>>()
+    val bookingResponse: LiveData<ResponseState<Any?>> get() = _bookingResponse
+
     private val repository = DoctorRepositories
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun bookAppointment(
+        scheduleId: String,
+        notifyChange: () -> Unit,
+    ) {
+        viewModelScope.launch {
+            _bookingResponse.value = ResponseState.Loading
+
+            val exception = repository.bookAppointment(scheduleId)
+            if (exception != null) {
+                _bookingResponse.value = ResponseState.Error(exception.message.toString())
+            } else {
+                _bookingResponse.value = ResponseState.Success("Appointment booked successfully!")
+                notifyChange()
+            }
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getScheduleOfDoctor(uid: String) {
@@ -49,12 +71,13 @@ class AppointmentListViewModel : ViewModel() {
                 appointments?.forEach { appointment ->
                     if (schedule.id == appointment.scheduleId) {
                         totalBooked += 1
-                    }
-                    if (appointment.userId == AuthRepositories.getCurrentUserId()) {
-                        isBooked = true
+                        if (appointment.userId == AuthRepositories.getCurrentUserId()) {
+                            isBooked = true
+                        }
                     }
                 }
                 newAppointments.add(AppointmentItemModel(
+                    id = schedule.id,
                     time = schedule.time,
                     totalSlot = schedule.totalSlot ?: 0,
                     availableSlot = max((schedule.totalSlot ?: 0) - totalBooked, 0),
