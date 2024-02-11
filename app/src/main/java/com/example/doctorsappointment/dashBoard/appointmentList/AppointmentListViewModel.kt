@@ -13,6 +13,7 @@ import com.example.doctorsappointment.repositories.DoctorRepositories
 import com.example.doctorsappointment.utils.DateTimeUtils
 import com.example.doctorsappointment.utils.ResponseState
 import com.example.doctorsappointment.utils.SlotStatus
+import com.example.doctorsappointment.utils.sortedByTime
 import kotlinx.coroutines.launch
 import java.util.Locale
 import kotlin.math.max
@@ -61,7 +62,9 @@ class AppointmentListViewModel : ViewModel() {
                 ))
             }
 
-            _scheduleResponse.value = ResponseState.Success(data = newAppointments)
+            val sortedAppointments = newAppointments.sortedByTime()
+
+            _scheduleResponse.value = ResponseState.Success(data = sortedAppointments)
         }
     }
 

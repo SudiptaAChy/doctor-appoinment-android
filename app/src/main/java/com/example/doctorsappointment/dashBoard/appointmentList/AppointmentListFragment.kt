@@ -49,7 +49,7 @@ class AppointmentListFragment : Fragment() {
                 }
                 is ResponseState.Success -> {
                     hideLoader()
-                    val adapter = AppointmentAdapter(it.data as List<AppointmentItemModel>)
+                    val adapter = AppointmentAdapter(requireContext(), it.data as List<AppointmentItemModel>)
                     binding.rvAppointments.adapter = adapter
                 }
             }

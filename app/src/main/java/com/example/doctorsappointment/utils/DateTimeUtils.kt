@@ -32,4 +32,17 @@ object DateTimeUtils {
         val time = instant.atZone(ZoneId.ofOffset("GMT", offset)).toLocalTime()
         return time.format(DateTimeFormatter.ofPattern("h:mm a"))
     }
+
+    fun getTimeInMinutes(time: String): Int {
+        val parts = time.split(":")
+        val hour = parts[0].toInt()
+        val minute = parts[1].substringBefore(" ").toInt()
+        val period = parts[1].substringAfter(" ")
+
+        var totalMinutes = hour * 60 + minute
+        if (period.equals("PM", ignoreCase = true) && hour != 12) {
+            totalMinutes += 12 * 60
+        }
+        return totalMinutes
+    }
 }

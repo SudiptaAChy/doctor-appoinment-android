@@ -1,14 +1,18 @@
 package com.example.doctorsappointment.dashBoard.appointmentList
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doctorsappointment.R
 import com.example.doctorsappointment.models.AppointmentItemModel
+import com.example.doctorsappointment.utils.SlotStatus
 
 class AppointmentAdapter(
+    private val context: Context,
     private val appointments: List<AppointmentItemModel>
 ): RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder>() {
     class AppointmentViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
@@ -33,5 +37,27 @@ class AppointmentAdapter(
         holder.totalSlot.text = "Total Slot: ${appointment.totalSlot}"
         holder.availableSlot.text = "Available Slot: ${appointment.availableSlot}"
         holder.slotStatus.text = appointment.slotStatus
+
+        holder.slotStatus.apply {
+            background = if (appointment.slotStatus?.uppercase() == SlotStatus.AVAILABLE.title.uppercase()) {
+                ContextCompat.getDrawable(context, R.drawable.circular_green_background)
+            } else if(appointment.slotStatus?.uppercase() == SlotStatus.BOOKED.title.uppercase()) {
+                ContextCompat.getDrawable(context, R.drawable.circular_purple_background)
+            } else if(appointment.slotStatus?.uppercase() == SlotStatus.FILLED_UP.title.uppercase()) {
+                ContextCompat.getDrawable(context, R.drawable.circular_red_background)
+            } else if(appointment.slotStatus?.uppercase() == SlotStatus.FINISHED.title.uppercase()) {
+                ContextCompat.getDrawable(context, R.drawable.circular_light_red_background)
+            } else {
+                ContextCompat.getDrawable(context, R.drawable.circular_grey_background)
+            }
+        }
+
+        if (appointment.slotStatus?.uppercase() == SlotStatus.NOT_AVAILABLE.title.uppercase()) {
+            holder.apply {
+                time.setTextColor(ContextCompat.getColor(context, R.color.disable_text_color))
+                totalSlot.setTextColor(ContextCompat.getColor(context, R.color.disable_text_color))
+                availableSlot.setTextColor(ContextCompat.getColor(context, R.color.disable_text_color))
+            }
+        }
     }
 }
