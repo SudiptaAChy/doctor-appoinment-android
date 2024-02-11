@@ -17,7 +17,7 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.ivBack.setOnClickListener {
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.dashboard_nav_graph) as NavHostFragment
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentDashboardView) as NavHostFragment
             val navController = navHostFragment.navController
             navController.navigateUp()
         }

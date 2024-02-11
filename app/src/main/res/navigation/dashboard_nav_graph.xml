@@ -6,23 +6,10 @@
     app:startDestination="@id/doctorsListFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.doctorsappointment.dashBoard.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.doctorsappointment.dashBoard.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profileFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/doctorsListFragment"
         android:name="com.example.doctorsappointment.dashBoard.doctorsList.DoctorsListFragment"
@@ -31,6 +18,9 @@
         <action
             android:id="@+id/action_doctorsListFragment_to_appointmentListFragment"
             app:destination="@id/appointmentListFragment" />
+        <action
+            android:id="@+id/action_doctorsListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/appointmentListFragment"
@@ -40,5 +30,8 @@
         <action
             android:id="@+id/action_appointmentListFragment_to_doctorsListFragment"
             app:destination="@id/doctorsListFragment" />
+        <action
+            android:id="@+id/action_appointmentListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>
