@@ -7,6 +7,17 @@
     tools:context=".dashBoard.doctorsList.DoctorsListFragment"
     android:paddingHorizontal="@dimen/_10sdp">
 
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/pbLoading"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cornerRadius="@dimen/_2sdp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAppointments"
         android:layout_width="match_parent"

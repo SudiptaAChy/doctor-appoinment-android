@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.doctorsappointment.R
@@ -55,7 +56,8 @@ class DoctorsListFragment : Fragment() {
                     hideLoader()
                     val doctors = (it.data as? List<DoctorModel>) ?: listOf()
                     val adapter = DoctorAdapter(doctors) { position ->
-                        findNavController().navigate(R.id.action_doctorsListFragment_to_appointmentListFragment)
+                        val bundle = bundleOf("uid" to doctors[position].uid)
+                        findNavController().navigate(R.id.action_doctorsListFragment_to_appointmentListFragment, bundle)
                     }
                     binding.rvDoctors.adapter = adapter
                 }

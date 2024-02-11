@@ -5,6 +5,6 @@ object Constants {
 
     const val USER_TABLE = "Users"
     const val DOCTOR_TABLE = "Doctors"
-    const val SCHEDULE_TABLE = "Schedule"
+    const val SCHEDULE_TABLE = "Schedules"
     const val APPOINTMENT_TABLE = "Appointments"
 }

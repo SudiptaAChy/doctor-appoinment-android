@@ -1,4 +1,4 @@
-package com.example.doctorsappointment.dashBoard.appointmentList
+package com.example.doctorsappointment.models
 
 data class AppointmentItemModel(
     val time: String? = null,

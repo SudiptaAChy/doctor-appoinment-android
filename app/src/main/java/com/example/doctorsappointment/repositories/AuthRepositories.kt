@@ -17,6 +17,11 @@ object AuthRepositories {
         return currentUser != null
     }
 
+    fun getCurrentUserId(): String {
+        val currentUser = auth.currentUser
+        return currentUser?.uid ?: ""
+    }
+
     suspend fun signUpUser(email: String, password: String): Pair<FirebaseUser?, Exception?> {
         return try {
             val authResult = auth.createUserWithEmailAndPassword(email, password).await()

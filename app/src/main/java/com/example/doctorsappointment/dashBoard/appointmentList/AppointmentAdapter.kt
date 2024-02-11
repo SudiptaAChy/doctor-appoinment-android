@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doctorsappointment.R
+import com.example.doctorsappointment.models.AppointmentItemModel
 
 class AppointmentAdapter(
     private val appointments: List<AppointmentItemModel>
@@ -29,8 +30,8 @@ class AppointmentAdapter(
     override fun onBindViewHolder(holder: AppointmentViewHolder, position: Int) {
         val appointment = appointments[position]
         holder.time.text = appointment.time
-        holder.totalSlot.text = appointment.totalSlot.toString()
-        holder.availableSlot.text = appointment.availableSlot.toString()
+        holder.totalSlot.text = "Total Slot: ${appointment.totalSlot}"
+        holder.availableSlot.text = "Available Slot: ${appointment.availableSlot}"
         holder.slotStatus.text = appointment.slotStatus
     }
 }
