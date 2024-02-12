@@ -33,6 +33,15 @@ object DateTimeUtils {
         return time.format(DateTimeFormatter.ofPattern("h:mm a"))
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun convertTimestampToDateTime(timestamp: String): String {
+        val offset = ZoneOffset.ofHours(6) // GMT+06:00
+        val instant = Instant.ofEpochSecond(timestamp.toLong())
+        val dateTime = LocalDateTime.ofInstant(instant, ZoneId.ofOffset("GMT", offset))
+        val formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY hh:mm a")
+        return dateTime.format(formatter)
+    }
+
     fun getTimeInMinutes(time: String): Int {
         val parts = time.split(":")
         val hour = parts[0].toInt()

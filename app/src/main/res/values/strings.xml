@@ -25,4 +25,7 @@
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="view_nschedule">View</string>
+    <string name="do_you_want_to_logout">Do you want to logout?</string>
+    <string name="logout">Logout</string>
+    <string name="see_all_your_booked_appointment">See all your booked appointment</string>
 </resources>

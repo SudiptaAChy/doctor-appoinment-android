@@ -51,7 +51,7 @@ object AuthRepositories {
         }
     }
 
-    suspend fun logOutUser() {
+    fun logOutUser() {
         auth.signOut()
     }
 }

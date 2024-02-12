@@ -31,12 +31,13 @@ class AppointmentListViewModel : ViewModel() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun bookAppointment(
         scheduleId: String,
+        doctorId: String?,
         notifyChange: () -> Unit,
     ) {
         viewModelScope.launch {
             _bookingResponse.value = ResponseState.Loading
 
-            val exception = repository.bookAppointment(scheduleId)
+            val exception = repository.bookAppointment(scheduleId, doctorId)
             if (exception != null) {
                 _bookingResponse.value = ResponseState.Error(exception.message.toString())
             } else {

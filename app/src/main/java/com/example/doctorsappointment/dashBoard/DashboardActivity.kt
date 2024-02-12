@@ -24,15 +24,15 @@ class DashboardActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         binding.ivBack.setOnClickListener {
+            navController?.navigateUp()
+        }
+
+        binding.ivProfileIcon.setOnClickListener {
             if (navController?.currentDestination?.id == R.id.doctorsListFragment) {
                 navController?.navigate(R.id.action_doctorsListFragment_to_profileFragment)
             } else if (navController?.currentDestination?.id == R.id.appointmentListFragment) {
                 navController?.navigate(R.id.action_appointmentListFragment_to_profileFragment)
             }
-        }
-
-        binding.ivProfileIcon.setOnClickListener {
-            navController?.navigate(R.id.profileFragment)
         }
     }
 
@@ -42,6 +42,14 @@ class DashboardActivity : AppCompatActivity() {
 
     fun hideBackButton() {
         binding.ivBack.visibility = View.GONE
+    }
+
+    fun hideProfileIcon() {
+        binding.ivProfileIcon.visibility = View.GONE
+    }
+
+    fun showProfileIcon() {
+        binding.ivProfileIcon.visibility = View.VISIBLE
     }
 
     fun showBackButton() {

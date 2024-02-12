@@ -24,12 +24,12 @@ object DoctorRepositories {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun bookAppointment(scheduleId: String): Exception? {
+    suspend fun bookAppointment(scheduleId: String, doctorId: String?): Exception? {
         return try {
             val db = Firebase.firestore
             val userId = AuthRepositories.getCurrentUserId()
             val createdAt = DateTimeUtils.getCurrentTimestamp()
-            db.collection(Constants.APPOINTMENT_TABLE).add(AppointmentModel(scheduleId, userId, createdAt)).await()
+            db.collection(Constants.APPOINTMENT_TABLE).add(AppointmentModel(scheduleId, userId, createdAt, doctorId)).await()
             null
         } catch (e: Exception) {
             e
@@ -49,6 +49,17 @@ object DoctorRepositories {
         }
     }
 
+    suspend fun getScheduleById(sid: String): Pair<ScheduleModel?, Exception?> {
+        return try {
+            val db = Firebase.firestore
+            val document = db.collection(Constants.SCHEDULE_TABLE).document(sid).get().await()
+            val schedule = document.toObject(ScheduleModel::class.java)
+            Pair(schedule, null)
+        } catch (e: Exception) {
+            Pair(null, e)
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getAllAppointments(): Pair<List<AppointmentModel>?, Exception?> {
         return try {
@@ -56,6 +67,19 @@ object DoctorRepositories {
             val time = DateTimeUtils.getStartingTimestampOfToday()
             val documents = db.collection(Constants.APPOINTMENT_TABLE)
                 .whereGreaterThan("createdAt", time)
+                .get().await()
+            val appointments = documents.toObjects(AppointmentModel::class.java)
+            Pair(appointments, null)
+        } catch (e: Exception) {
+            Pair(null, e)
+        }
+    }
+
+    suspend fun getAppointmentsOfUser(uid: String): Pair<List<AppointmentModel>?, Exception?> {
+        return try {
+            val db = Firebase.firestore
+            val documents = db.collection(Constants.APPOINTMENT_TABLE)
+                .whereEqualTo("userId", uid)
                 .get().await()
             val appointments = documents.toObjects(AppointmentModel::class.java)
             Pair(appointments, null)

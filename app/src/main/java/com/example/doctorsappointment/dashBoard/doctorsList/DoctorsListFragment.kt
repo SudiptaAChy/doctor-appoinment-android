@@ -82,6 +82,7 @@ class DoctorsListFragment : Fragment() {
 
         (requireActivity() as DashboardActivity).setAppBarTitle("Doctor's List")
         (requireActivity() as DashboardActivity).hideBackButton()
+        (requireActivity() as DashboardActivity).showProfileIcon()
 
         val currentDateTime = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("MMM d, yyyy hh:mm a", Locale.ENGLISH)

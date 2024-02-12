@@ -61,7 +61,7 @@ class AppointmentListFragment : Fragment() {
                         appointments.toMutableList()
                     ) { position ->
                         appointments[position].id?.let { id ->
-                            viewModel.bookAppointment(id) {
+                            viewModel.bookAppointment(id, arguments?.getString("uid")) {
                                 val newData = AppointmentItemModel(
                                     id = appointments[position].id,
                                     totalSlot = appointments[position].totalSlot,
@@ -109,6 +109,7 @@ class AppointmentListFragment : Fragment() {
 
         (requireActivity() as DashboardActivity).setAppBarTitle("Appointment Schedule")
         (requireActivity() as DashboardActivity).showBackButton()
+        (requireActivity() as DashboardActivity).showProfileIcon()
 
         viewModel.getScheduleOfDoctor(arguments?.getString("uid") ?: "")
     }
